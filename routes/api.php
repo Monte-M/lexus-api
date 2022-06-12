@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Public routes
+Route::get('/cars', [CarController::class, 'index']);
+Route::get('/cars/{id}', [CarController::class, 'show']);
+Route::get('/cars/search/{model}', [CarController::class, 'search']);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+// Protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/cars', [CarController::class, 'store']);
+    Route::put('/cars/{id}', [CarController::class, 'update']);
+    Route::delete('/cars/{id}', [CarController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
