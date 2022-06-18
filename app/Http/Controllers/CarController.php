@@ -29,6 +29,8 @@ class CarController extends Controller
             'make' => 'required',
             'model' => 'required',
             'engine' => 'required',
+            'price' => 'required|numeric',
+
         ]);
 
         return Car::create($request->all());

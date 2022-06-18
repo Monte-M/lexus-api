@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::get('/cars', [CarController::class, 'index']);
 Route::get('/cars/{id}', [CarController::class, 'show']);
 Route::get('/cars/search/{model}', [CarController::class, 'search']);
 
+Route::get('/branches', [BranchController::class, 'index']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -28,5 +31,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/cars', [CarController::class, 'store']);
     Route::put('/cars/{id}', [CarController::class, 'update']);
     Route::delete('/cars/{id}', [CarController::class, 'destroy']);
+
+    Route::post('/branches', [BranchController::class, 'store']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
