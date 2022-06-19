@@ -5,31 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Salesmen extends Model
 {
     use HasFactory;
 
-    protected $table = 'cars';
+    protected $table = 'salesmen';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'make',
-        'model',
-        'engine',
-        'price',
-        'year',
+        'name',
+        'surname',
+        'email',
+        'phone',
         'branch_id',
-        'salesmen_id'
     ];
 
     public function branch()
     {
         return $this->belongsTo(Branch::class);
-    }
-
-    public function salesmen()
-    {
-        return $this->belongsTo(Salesmen::class);
     }
 }

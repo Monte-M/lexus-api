@@ -14,7 +14,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Car::all();
+        $cars = Car::with('salesmen');
+        return $cars->paginate(10);
     }
 
     /**
@@ -29,8 +30,10 @@ class CarController extends Controller
             'make' => 'required',
             'model' => 'required',
             'engine' => 'required',
+            'year' => 'required',
             'price' => 'required|numeric',
-
+            'branch_id' => 'required|numeric',
+            'salesmen_id' => 'required|numeric',
         ]);
 
         return Car::create($request->all());

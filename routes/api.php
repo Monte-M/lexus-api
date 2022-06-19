@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\SalesmenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,8 @@ Route::get('/cars/search/{model}', [CarController::class, 'search']);
 
 Route::get('/branches', [BranchController::class, 'index']);
 
+Route::get('/salesmen', [SalesmenController::class, 'index']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -33,6 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/cars/{id}', [CarController::class, 'destroy']);
 
     Route::post('/branches', [BranchController::class, 'store']);
+
+    Route::post('/salesmen', [SalesmenController::class, 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
